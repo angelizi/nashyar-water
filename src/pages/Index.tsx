@@ -105,7 +105,7 @@ const Index = () => {
             {[
               { icon: Droplets, label: "Pure Water" },
               { icon: Truck, label: "Fast Delivery" },  
-              { icon: Clock, label: "24/7 Service" },
+              { icon: Clock, label: "Time Slots" },
               { icon: Shield, label: "Quality Assured" },
             ].map((feature, index) => (
               <div key={index} className="flex flex-col items-center gap-2 p-4 bg-card rounded-lg">
