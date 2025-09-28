@@ -2,6 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Star, Clock, Truck } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface PlantCardProps {
   name: string;
@@ -13,6 +14,13 @@ interface PlantCardProps {
 }
 
 export function PlantCard({ name, rating, deliveryTime, image, products, minOrder }: PlantCardProps) {
+  const navigate = useNavigate();
+  
+  const handleViewProducts = () => {
+    const plantSlug = name.toLowerCase().replace(/\s+/g, "-");
+    navigate(`/plant/${plantSlug}`);
+  };
+
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer">
       <div className="relative">
@@ -62,7 +70,7 @@ export function PlantCard({ name, rating, deliveryTime, image, products, minOrde
         <Button 
           className="w-full" 
           size="sm"
-          onClick={() => console.log(`View products for ${name}`)}
+          onClick={handleViewProducts}
         >
           View Products
         </Button>
