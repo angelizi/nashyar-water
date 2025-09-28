@@ -32,10 +32,18 @@ export function Header() {
 
           {/* User Actions */}
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="sm">
+            <Button 
+              variant="ghost" 
+              size="sm"
+              onClick={() => console.log("Language toggle clicked")}
+            >
               EN | తె
             </Button>
-            <Button variant="outline" size="sm">
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={() => console.log("Login clicked")}
+            >
               <User className="w-4 h-4 mr-2" />
               Login
             </Button>

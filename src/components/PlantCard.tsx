@@ -59,7 +59,11 @@ export function PlantCard({ name, rating, deliveryTime, image, products, minOrde
           )}
         </div>
         
-        <Button className="w-full" size="sm">
+        <Button 
+          className="w-full" 
+          size="sm"
+          onClick={() => console.log(`View products for ${name}`)}
+        >
           View Products
         </Button>
       </CardContent>
