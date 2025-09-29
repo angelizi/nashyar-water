@@ -1,13 +1,23 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { ProductCard } from "@/components/ProductCard";
+import { CartButton } from "@/components/CartButton";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Star, Clock, Truck } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const PlantMenu = () => {
   const { plantName } = useParams();
   const navigate = useNavigate();
+  const { toast } = useToast();
+
+  const handleCartClick = () => {
+    toast({
+      title: "Cart Feature",
+      description: "Cart page coming soon!",
+    });
+  };
 
   // Mock data - in real app this would come from API/database
   const plantDetails = {
@@ -155,13 +165,16 @@ const PlantMenu = () => {
 
       {/* Products Menu */}
       <main className="container mx-auto px-4 py-8">
-        <div className="mb-6">
-          <h2 className="text-2xl font-bold text-foreground mb-2">
-            Available Products
-          </h2>
-          <p className="text-muted-foreground">
-            Choose from our fresh water products
-          </p>
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h2 className="text-2xl font-bold text-foreground mb-2">
+              Available Products
+            </h2>
+            <p className="text-muted-foreground">
+              Choose from our fresh water products
+            </p>
+          </div>
+          <CartButton onClick={handleCartClick} />
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

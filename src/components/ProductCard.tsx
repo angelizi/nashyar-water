@@ -1,8 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Plus, Minus, ShoppingCart } from "lucide-react";
-import { useState } from "react";
+import { Plus, Minus } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
 
 interface ProductCardProps {
   id: string;
@@ -14,17 +14,16 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ id, name, price, description, image, inStock }: ProductCardProps) {
-  const [quantity, setQuantity] = useState(0);
+  const { addItem, updateQuantity, getItemQuantity } = useCart();
+  const quantity = getItemQuantity(id);
 
   const handleAddToCart = () => {
-    if (quantity === 0) {
-      setQuantity(1);
-    }
+    addItem({ id, name, price, image });
   };
 
   const handleQuantityChange = (change: number) => {
     const newQuantity = Math.max(0, quantity + change);
-    setQuantity(newQuantity);
+    updateQuantity(id, newQuantity);
   };
 
   return (
