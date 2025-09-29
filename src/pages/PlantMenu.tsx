@@ -5,19 +5,10 @@ import { CartButton } from "@/components/CartButton";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Star, Clock, Truck } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
 
 const PlantMenu = () => {
   const { plantName } = useParams();
   const navigate = useNavigate();
-  const { toast } = useToast();
-
-  const handleCartClick = () => {
-    toast({
-      title: "Cart Feature",
-      description: "Cart page coming soon!",
-    });
-  };
 
   // Mock data - in real app this would come from API/database
   const plantDetails = {
@@ -174,7 +165,7 @@ const PlantMenu = () => {
               Choose from our fresh water products
             </p>
           </div>
-          <CartButton onClick={handleCartClick} />
+          <CartButton />
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

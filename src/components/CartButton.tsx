@@ -2,21 +2,23 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ShoppingCart } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
+import { useNavigate } from "react-router-dom";
 
-interface CartButtonProps {
-  onClick: () => void;
-}
-
-export function CartButton({ onClick }: CartButtonProps) {
+export function CartButton() {
   const { totalItems, totalPrice } = useCart();
+  const navigate = useNavigate();
 
   if (totalItems === 0) {
     return null;
   }
 
+  const handleCartClick = () => {
+    navigate("/cart");
+  };
+
   return (
     <Button
-      onClick={onClick}
+      onClick={handleCartClick}
       className="relative bg-primary hover:bg-primary/90 text-primary-foreground"
       size="sm"
     >

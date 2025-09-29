@@ -2,18 +2,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CartButton } from "@/components/CartButton";
 import { Search, MapPin, User, Droplets } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
 
 export function Header() {
-  const { toast } = useToast();
-
-  const handleCartClick = () => {
-    toast({
-      title: "Cart Feature",
-      description: "Cart page coming soon!",
-    });
-  };
-
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b">
       <div className="container mx-auto px-4 py-3">
@@ -43,7 +33,7 @@ export function Header() {
 
           {/* Cart and User Actions */}
           <div className="flex items-center gap-2">
-            <CartButton onClick={handleCartClick} />
+            <CartButton />
             
             <Button 
               variant="ghost" 
