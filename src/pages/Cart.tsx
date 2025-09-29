@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -16,8 +16,7 @@ const Cart = () => {
   const [appliedPromo, setAppliedPromo] = useState<string | null>(null);
   const [discount, setDiscount] = useState(0);
 
-  const deliveryFee = totalPrice > 100 ? 0 : 20;
-  const finalTotal = totalPrice + deliveryFee - discount;
+  const finalTotal = totalPrice - discount;
 
   const handleQuantityChange = (id: string, newQuantity: number) => {
     if (newQuantity <= 0) {
@@ -32,7 +31,7 @@ const Cart = () => {
     const promoCodes = {
       "FIRST10": { discount: totalPrice * 0.1, description: "10% off first order" },
       "SAVE20": { discount: 20, description: "₹20 off" },
-      "FREE50": { discount: totalPrice >= 50 ? deliveryFee : 0, description: "Free delivery on orders ₹50+" }
+      "WELCOME15": { discount: 15, description: "₹15 off your order" }
     };
 
     const promo = promoCodes[promoCode.toUpperCase() as keyof typeof promoCodes];
@@ -206,13 +205,6 @@ const Cart = () => {
                     <span>Subtotal ({totalItems} items)</span>
                     <span>₹{totalPrice}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span>Delivery Fee</span>
-                    <span className={deliveryFee === 0 ? "text-success line-through" : ""}>
-                      ₹{deliveryFee}
-                      {deliveryFee === 0 && " FREE"}
-                    </span>
-                  </div>
                   {discount > 0 && (
                     <div className="flex justify-between text-success">
                       <span>Discount</span>
@@ -237,7 +229,12 @@ const Cart = () => {
                 </Button>
 
                 <div className="text-xs text-muted-foreground text-center">
-                  <p>By proceeding, you agree to our terms & conditions</p>
+                  <p>
+                    By proceeding, you agree to our{" "}
+                    <Link to="/terms" className="text-primary hover:underline">
+                      terms & conditions
+                    </Link>
+                  </p>
                 </div>
               </CardContent>
             </Card>
