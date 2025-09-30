@@ -5,6 +5,14 @@ import { CartButton } from "@/components/CartButton";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Star, Clock, Truck } from "lucide-react";
+import waterPlant1 from "@/assets/water-plant-1.jpg";
+import waterPlant2 from "@/assets/water-plant-2.jpg";
+import waterPlant3 from "@/assets/water-plant-3.jpg";
+import waterPlant4 from "@/assets/water-plant-4.jpg";
+import bubbleCan from "@/assets/bubble-can.jpg";
+import tappedBubble from "@/assets/tapped-bubble.jpg";
+import bottle1L from "@/assets/1l-bottle.jpg";
+import bottle2L from "@/assets/2l-bottle.jpg";
 
 const PlantMenu = () => {
   const { plantName } = useParams();
@@ -12,11 +20,11 @@ const PlantMenu = () => {
 
   // Mock data - in real app this would come from API/database
   const plantDetails = {
-    "amulya-water-plant": {
-      name: "Amulya Water Plant",
+    "aqua-pure-waters": {
+      name: "Aqua Pure Waters",
       rating: 4.5,
       deliveryTime: "30-45 mins",
-      image: "/placeholder.svg",
+      image: waterPlant1,
       minOrder: 50,
       address: "Main Road, Repalle, Guntur",
       isOpen: true,
@@ -26,15 +34,7 @@ const PlantMenu = () => {
           name: "Bubble Can",
           price: 15,
           description: "Fresh mineral water in 20L bubble can",
-          image: "/placeholder.svg",
-          inStock: true,
-        },
-        {
-          id: "2",
-          name: "Cooling Can",
-          price: 25,
-          description: "Special cooling water can for summer",
-          image: "/placeholder.svg",
+          image: bubbleCan,
           inStock: true,
         },
         {
@@ -42,16 +42,16 @@ const PlantMenu = () => {
           name: "1L Water Bottle",
           price: 10,
           description: "Pure drinking water in 1 liter bottle",
-          image: "/placeholder.svg",
+          image: bottle1L,
           inStock: true,
         }
       ]
     },
-    "sujala-water-plant": {
-      name: "Sujala Water Plant",
+    "crystal-springs": {
+      name: "Crystal Springs",
       rating: 4.3,
       deliveryTime: "25-40 mins",
-      image: "/placeholder.svg",
+      image: waterPlant2,
       minOrder: 40,
       address: "Market Street, Repalle, Guntur",
       isOpen: true,
@@ -61,7 +61,7 @@ const PlantMenu = () => {
           name: "Tapped Bubble",
           price: 20,
           description: "Premium 20L water can with tap facility",
-          image: "/placeholder.svg",
+          image: tappedBubble,
           inStock: true,
         },
         {
@@ -69,16 +69,70 @@ const PlantMenu = () => {
           name: "2L Water Bottle",
           price: 20,
           description: "Family pack 2 liter water bottle",
-          image: "/placeholder.svg",
+          image: bottle2L,
+          inStock: true,
+        }
+      ]
+    },
+    "blue-horizon-water": {
+      name: "Blue Horizon Water",
+      rating: 4.7,
+      deliveryTime: "35-50 mins",
+      image: waterPlant3,
+      minOrder: 60,
+      address: "Station Road, Repalle, Guntur",
+      isOpen: true,
+      products: [
+        {
+          id: "1",
+          name: "Bubble Can",
+          price: 15,
+          description: "Fresh mineral water in 20L bubble can",
+          image: bubbleCan,
           inStock: true,
         },
         {
           id: "3",
-          name: "Cooling Can",
-          price: 25,
-          description: "Special cooling water can for summer",
-          image: "/placeholder.svg",
-          inStock: false,
+          name: "1L Water Bottle",
+          price: 10,
+          description: "Pure drinking water in 1 liter bottle",
+          image: bottle1L,
+          inStock: true,
+        },
+        {
+          id: "4",
+          name: "2L Water Bottle",
+          price: 20,
+          description: "Family pack 2 liter water bottle",
+          image: bottle2L,
+          inStock: true,
+        }
+      ]
+    },
+    "fresh-flow-waters": {
+      name: "Fresh Flow Waters",
+      rating: 4.4,
+      deliveryTime: "20-35 mins",
+      image: waterPlant4,
+      minOrder: 45,
+      address: "Temple Street, Repalle, Guntur",
+      isOpen: true,
+      products: [
+        {
+          id: "2",
+          name: "Tapped Bubble",
+          price: 20,
+          description: "Premium 20L water can with tap facility",
+          image: tappedBubble,
+          inStock: true,
+        },
+        {
+          id: "3",
+          name: "1L Water Bottle",
+          price: 10,
+          description: "Pure drinking water in 1 liter bottle",
+          image: bottle1L,
+          inStock: true,
         }
       ]
     }

@@ -5,8 +5,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useCart } from "@/contexts/CartContext";
-import { ArrowLeft, Plus, Minus, Trash2, Tag, ShoppingBag } from "lucide-react";
+import { ArrowLeft, Plus, Minus, Trash2, Tag, ShoppingBag, Clock } from "lucide-react";
 import { useState } from "react";
 
 const Cart = () => {
@@ -15,6 +17,7 @@ const Cart = () => {
   const [promoCode, setPromoCode] = useState("");
   const [appliedPromo, setAppliedPromo] = useState<string | null>(null);
   const [discount, setDiscount] = useState(0);
+  const [deliverySlot, setDeliverySlot] = useState("morning");
 
   const finalTotal = totalPrice - discount;
 
@@ -109,19 +112,19 @@ const Cart = () => {
               </CardHeader>
               <CardContent className="space-y-4">
                 {items.map((item) => (
-                  <div key={item.id} className="flex items-center gap-4 p-4 border rounded-lg">
+                  <div key={item.id} className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-4 border rounded-lg">
                     <img 
                       src={item.image} 
                       alt={item.name}
-                      className="w-16 h-16 object-cover rounded-md"
+                      className="w-16 h-16 object-cover rounded-md flex-shrink-0"
                     />
                     
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-foreground">{item.name}</h3>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-semibold text-foreground truncate">{item.name}</h3>
                       <p className="text-lg font-bold text-primary">₹{item.price}</p>
                     </div>
                     
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 ml-auto sm:ml-0">
                       <Button
                         size="sm"
                         variant="outline"
@@ -145,8 +148,8 @@ const Cart = () => {
                       </Button>
                     </div>
                     
-                    <div className="text-right">
-                      <p className="font-bold">₹{item.price * item.quantity}</p>
+                    <div className="flex items-center justify-between w-full sm:w-auto sm:block sm:text-right">
+                      <p className="font-bold whitespace-nowrap">₹{item.price * item.quantity}</p>
                       <Button
                         size="sm"
                         variant="ghost"
@@ -169,6 +172,39 @@ const Cart = () => {
                 <CardTitle>Order Summary</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
+                {/* Delivery Time Slot */}
+                <div className="space-y-3">
+                  <Label className="text-sm font-medium flex items-center gap-2">
+                    <Clock className="w-4 h-4" />
+                    Select Delivery Time
+                  </Label>
+                  <RadioGroup value={deliverySlot} onValueChange={setDeliverySlot}>
+                    <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-accent/50 cursor-pointer">
+                      <RadioGroupItem value="morning" id="morning" />
+                      <Label htmlFor="morning" className="flex-1 cursor-pointer">
+                        <div className="font-medium">Morning Slot</div>
+                        <div className="text-sm text-muted-foreground">09:00 AM - 12:00 PM</div>
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-accent/50 cursor-pointer">
+                      <RadioGroupItem value="afternoon" id="afternoon" />
+                      <Label htmlFor="afternoon" className="flex-1 cursor-pointer">
+                        <div className="font-medium">Afternoon Slot</div>
+                        <div className="text-sm text-muted-foreground">01:00 PM - 04:00 PM</div>
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-accent/50 cursor-pointer">
+                      <RadioGroupItem value="evening" id="evening" />
+                      <Label htmlFor="evening" className="flex-1 cursor-pointer">
+                        <div className="font-medium">Evening Slot</div>
+                        <div className="text-sm text-muted-foreground">05:00 PM - 08:00 PM</div>
+                      </Label>
+                    </div>
+                  </RadioGroup>
+                </div>
+
+                <Separator />
+
                 {/* Promo Code */}
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Promo Code</label>
@@ -228,7 +264,7 @@ const Cart = () => {
                   Proceed to Payment
                 </Button>
 
-                <div className="text-xs text-muted-foreground text-center">
+                <div className="text-xs text-muted-foreground text-center break-words">
                   <p>
                     By proceeding, you agree to our{" "}
                     <Link to="/terms" className="text-primary hover:underline">

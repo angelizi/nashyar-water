@@ -1,43 +1,50 @@
 import { Header } from "@/components/Header";
 import { PlantCard } from "@/components/PlantCard";
 import { ProductCard } from "@/components/ProductCard";
-import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Droplets, Truck, Clock, Shield } from "lucide-react";
+import waterPlant1 from "@/assets/water-plant-1.jpg";
+import waterPlant2 from "@/assets/water-plant-2.jpg";
+import waterPlant3 from "@/assets/water-plant-3.jpg";
+import waterPlant4 from "@/assets/water-plant-4.jpg";
+import bubbleCan from "@/assets/bubble-can.jpg";
+import tappedBubble from "@/assets/tapped-bubble.jpg";
+import bottle1L from "@/assets/1l-bottle.jpg";
+import bottle2L from "@/assets/2l-bottle.jpg";
 
 const Index = () => {
   // Mock data for water plants
   const waterPlants = [
     {
-      name: "Amulya Water Plant",
+      name: "Aqua Pure Waters",
       rating: 4.5,
       deliveryTime: "30-45 mins",
-      image: "/placeholder.svg",
-      products: ["Bubble Can", "Cooling Can", "1L Bottle"],
+      image: waterPlant1,
+      products: ["Bubble Can", "1L Bottle"],
       minOrder: 50,
     },
     {
-      name: "Sujala Water Plant", 
+      name: "Crystal Springs", 
       rating: 4.3,
       deliveryTime: "25-40 mins",
-      image: "/placeholder.svg",
-      products: ["Tapped Bubble", "2L Bottle", "Cooling Can"],
+      image: waterPlant2,
+      products: ["Tapped Bubble", "2L Bottle"],
       minOrder: 40,
     },
     {
-      name: "Ashta Lakshmi Water",
+      name: "Blue Horizon Water",
       rating: 4.7,
       deliveryTime: "35-50 mins", 
-      image: "/placeholder.svg",
+      image: waterPlant3,
       products: ["Bubble Can", "1L Bottle", "2L Bottle"],
       minOrder: 60,
     },
     {
-      name: "Sri Krishna Water",
+      name: "Fresh Flow Waters",
       rating: 4.4,
       deliveryTime: "20-35 mins",
-      image: "/placeholder.svg", 
-      products: ["Cooling Can", "Tapped Bubble", "1L Bottle"],
+      image: waterPlant4, 
+      products: ["Tapped Bubble", "1L Bottle"],
       minOrder: 45,
     },
   ];
@@ -49,7 +56,7 @@ const Index = () => {
       name: "Bubble Can",
       price: 15,
       description: "Fresh mineral water in 20L bubble can",
-      image: "/placeholder.svg",
+      image: bubbleCan,
       inStock: true,
     },
     {
@@ -57,32 +64,24 @@ const Index = () => {
       name: "Tapped Bubble",
       price: 20,
       description: "Premium 20L water can with tap facility",
-      image: "/placeholder.svg",
+      image: tappedBubble,
       inStock: true,
     },
     {
       id: "3",
-      name: "Cooling Can", 
-      price: 25,
-      description: "Special cooling water can for summer",
-      image: "/placeholder.svg",
+      name: "1L Water Bottle",
+      price: 10,
+      description: "Pure drinking water in 1 liter bottle", 
+      image: bottle1L,
       inStock: true,
     },
     {
       id: "4",
-      name: "1L Water Bottle",
-      price: 10,
-      description: "Pure drinking water in 1 liter bottle", 
-      image: "/placeholder.svg",
-      inStock: true,
-    },
-    {
-      id: "5",
       name: "2L Water Bottle",
       price: 20,
       description: "Family pack 2 liter water bottle",
-      image: "/placeholder.svg",
-      inStock: false,
+      image: bottle2L,
+      inStock: true,
     },
   ];
 
