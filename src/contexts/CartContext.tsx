@@ -6,6 +6,7 @@ export interface CartItem {
   price: number;
   quantity: number;
   image: string;
+  plantName?: string;
 }
 
 interface CartState {
@@ -15,14 +16,14 @@ interface CartState {
 }
 
 type CartAction =
-  | { type: 'ADD_ITEM'; payload: { id: string; name: string; price: number; image: string } }
+  | { type: 'ADD_ITEM'; payload: { id: string; name: string; price: number; image: string; plantName?: string } }
   | { type: 'REMOVE_ITEM'; payload: { id: string } }
   | { type: 'UPDATE_QUANTITY'; payload: { id: string; quantity: number } }
   | { type: 'CLEAR_CART' }
   | { type: 'LOAD_CART'; payload: CartState };
 
 interface CartContextType extends CartState {
-  addItem: (item: { id: string; name: string; price: number; image: string }) => void;
+  addItem: (item: { id: string; name: string; price: number; image: string; plantName?: string }) => void;
   removeItem: (id: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
   clearCart: () => void;
@@ -117,7 +118,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(state));
   }, [state]);
 
-  const addItem = (item: { id: string; name: string; price: number; image: string }) => {
+  const addItem = (item: { id: string; name: string; price: number; image: string; plantName?: string }) => {
     dispatch({ type: 'ADD_ITEM', payload: item });
   };
 

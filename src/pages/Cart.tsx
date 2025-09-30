@@ -121,6 +121,9 @@ const Cart = () => {
                     
                     <div className="flex-1 min-w-0">
                       <h3 className="font-semibold text-foreground truncate">{item.name}</h3>
+                      {item.plantName && (
+                        <p className="text-xs text-muted-foreground/80 italic">from {item.plantName}</p>
+                      )}
                       <p className="text-lg font-bold text-primary">₹{item.price}</p>
                     </div>
                     

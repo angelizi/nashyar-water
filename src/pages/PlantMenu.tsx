@@ -224,7 +224,7 @@ const PlantMenu = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {plant.products.map((product) => (
-            <ProductCard key={product.id} {...product} />
+            <ProductCard key={product.id} {...product} plantName={plant.name} />
           ))}
         </div>
         

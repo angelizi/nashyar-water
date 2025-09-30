@@ -11,14 +11,15 @@ interface ProductCardProps {
   description: string;
   image: string;
   inStock: boolean;
+  plantName?: string;
 }
 
-export function ProductCard({ id, name, price, description, image, inStock }: ProductCardProps) {
+export function ProductCard({ id, name, price, description, image, inStock, plantName }: ProductCardProps) {
   const { addItem, updateQuantity, getItemQuantity } = useCart();
   const quantity = getItemQuantity(id);
 
   const handleAddToCart = () => {
-    addItem({ id, name, price, image });
+    addItem({ id, name, price, image, plantName });
   };
 
   const handleQuantityChange = (change: number) => {
