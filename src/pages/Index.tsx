@@ -1,14 +1,16 @@
 import { Header } from "@/components/Header";
 import { PlantCard } from "@/components/PlantCard";
 import { ProductCard } from "@/components/ProductCard";
+import { FloatingHomeButton } from "@/components/FloatingHomeButton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Droplets, Truck, Clock, Shield } from "lucide-react";
 import waterPlant1 from "@/assets/water-plant-1.jpg";
 import waterPlant2 from "@/assets/water-plant-2.jpg";
 import waterPlant3 from "@/assets/water-plant-3.jpg";
 import waterPlant4 from "@/assets/water-plant-4.jpg";
-import bubbleCan from "@/assets/bubble-can.jpg";
-import tappedBubble from "@/assets/tapped-bubble.jpg";
+import bubbleCanPlain from "@/assets/bubble-can-plain.png";
+import bubbleCanWithTap from "@/assets/bubble-can-with-tap.png";
+import coolingCan from "@/assets/cooling-can.png";
 import bottle1L from "@/assets/1l-bottle.jpg";
 import bottle2L from "@/assets/2l-bottle.jpg";
 
@@ -53,41 +55,50 @@ const Index = () => {
   const products = [
     {
       id: "1",
-      name: "Bubble Can",
-      price: 15,
-      description: "Fresh mineral water in 20L bubble can",
-      image: bubbleCan,
+      name: "20L Bubble Can",
+      price: 80,
+      description: "Standard 20L water can for home and office",
+      image: bubbleCanPlain,
       inStock: true,
     },
     {
       id: "2", 
-      name: "Tapped Bubble",
-      price: 20,
-      description: "Premium 20L water can with tap facility",
-      image: tappedBubble,
+      name: "20L Bubble with Tap",
+      price: 95,
+      description: "20L can with convenient dispenser tap",
+      image: bubbleCanWithTap,
       inStock: true,
     },
     {
       id: "3",
-      name: "1L Water Bottle",
-      price: 10,
-      description: "Pure drinking water in 1 liter bottle", 
-      image: bottle1L,
+      name: "20L Cooling Can",
+      price: 120,
+      description: "Temperature-controlled cooling water can",
+      image: coolingCan,
       inStock: true,
     },
     {
       id: "4",
-      name: "2L Water Bottle",
+      name: "1L Water Bottle",
       price: 20,
-      description: "Family pack 2 liter water bottle",
+      description: "Convenient 1L bottle for on-the-go", 
+      image: bottle1L,
+      inStock: true,
+    },
+    {
+      id: "5",
+      name: "2L Water Bottle",
+      price: 35,
+      description: "Large 2L bottle for families",
       image: bottle2L,
       inStock: true,
     },
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background pb-20 lg:pb-8">
       <Header />
+      <FloatingHomeButton />
       
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-primary/10 to-accent/10 py-12">

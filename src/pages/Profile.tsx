@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Header } from "@/components/Header";
+import { FloatingBackButton } from "@/components/FloatingBackButton";
+import { FloatingHomeButton } from "@/components/FloatingHomeButton";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -24,8 +26,10 @@ export default function Profile() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background pb-20 lg:pb-8">
       <Header />
+      <FloatingBackButton />
+      <FloatingHomeButton />
       <main className="container mx-auto px-4 py-8">
         <Card>
           <CardHeader>

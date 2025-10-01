@@ -1,4 +1,4 @@
-import { User, Headphones, History, TrendingUp, Settings, Moon, Sun, Bell, LogOut } from "lucide-react";
+import { User, Headphones, History, Settings, Moon, Sun, Bell, LogOut, Heart, Package } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
 import {
   Sidebar,
@@ -16,11 +16,12 @@ import { useTheme } from "next-themes";
 
 const menuItems = [
   { title: "Profile", url: "/profile", icon: User },
-  { title: "Customer Support", url: "/support", icon: Headphones },
+  { title: "Favorites", url: "/favorites", icon: Heart },
+  { title: "Party Orders", url: "/party-orders", icon: Package },
   { title: "Order History", url: "/orders", icon: History },
-  { title: "Monthly Spend", url: "/spend", icon: TrendingUp },
-  { title: "Settings", url: "/settings", icon: Settings },
+  { title: "Customer Support", url: "/support", icon: Headphones },
   { title: "Notifications", url: "/notifications", icon: Bell },
+  { title: "Settings", url: "/settings", icon: Settings },
 ];
 
 export function AppSidebar() {

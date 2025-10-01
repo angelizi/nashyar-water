@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Header } from "@/components/Header";
+import { FloatingBackButton } from "@/components/FloatingBackButton";
+import { FloatingHomeButton } from "@/components/FloatingHomeButton";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft } from "lucide-react";
@@ -8,18 +10,12 @@ const Terms = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background pb-20 lg:pb-8">
       <Header />
+      <FloatingBackButton />
+      <FloatingHomeButton />
       
       <div className="container mx-auto px-4 py-8">
-        <Button 
-          variant="ghost" 
-          onClick={() => navigate(-1)}
-          className="mb-6"
-        >
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Back
-        </Button>
 
         <Card>
           <CardHeader>

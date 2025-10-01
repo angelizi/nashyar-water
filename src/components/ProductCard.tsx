@@ -1,8 +1,9 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Plus, Minus } from "lucide-react";
+import { Plus, Minus, Heart } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
+import { useFavorites } from "@/contexts/FavoritesContext";
 
 interface ProductCardProps {
   id: string;
@@ -16,7 +17,9 @@ interface ProductCardProps {
 
 export function ProductCard({ id, name, price, description, image, inStock, plantName }: ProductCardProps) {
   const { addItem, updateQuantity, getItemQuantity } = useCart();
+  const { addFavorite, removeFavorite, isFavorite } = useFavorites();
   const quantity = getItemQuantity(id);
+  const favorite = isFavorite(id);
 
   const handleAddToCart = () => {
     addItem({ id, name, price, image, plantName });
@@ -27,18 +30,36 @@ export function ProductCard({ id, name, price, description, image, inStock, plan
     updateQuantity(id, newQuantity);
   };
 
+  const handleFavoriteToggle = () => {
+    if (favorite) {
+      removeFavorite(id);
+    } else {
+      addFavorite({ id, name, price, image, plantName });
+    }
+  };
+
   return (
     <Card className="overflow-hidden hover:shadow-md transition-shadow">
       <CardContent className="p-4">
         <div className="flex gap-4">
           <div className="flex-1">
-            <div className="flex items-start justify-between mb-2">
+            <div className="flex items-start justify-between mb-2 gap-2">
               <h3 className="font-semibold text-foreground">{name}</h3>
-              {!inStock && (
-                <Badge variant="destructive" className="text-xs">
-                  Out of Stock
-                </Badge>
-              )}
+              <div className="flex items-center gap-2">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8"
+                  onClick={handleFavoriteToggle}
+                >
+                  <Heart className={`w-4 h-4 ${favorite ? "fill-current text-primary" : ""}`} />
+                </Button>
+                {!inStock && (
+                  <Badge variant="destructive" className="text-xs">
+                    Out of Stock
+                  </Badge>
+                )}
+              </div>
             </div>
             
             <p className="text-sm text-muted-foreground mb-3 line-clamp-2">

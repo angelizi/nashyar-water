@@ -45,8 +45,10 @@ const statusConfig = {
 
 export default function OrderHistory() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background pb-20 lg:pb-8">
       <Header />
+      <FloatingBackButton />
+      <FloatingHomeButton />
       <main className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold mb-6">Order History</h1>
         

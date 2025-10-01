@@ -2,14 +2,18 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { CartButton } from "@/components/CartButton";
 import { SearchDialog } from "@/components/SearchDialog";
-import { Search, MapPin, User, Droplets } from "lucide-react";
+import { Search, MapPin, Bell, Droplets } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useSidebar } from "@/components/ui/sidebar";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useNavigate } from "react-router-dom";
 
 export function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
   const { totalItems } = useCart();
   const { toggleSidebar } = useSidebar();
+  const { language, setLanguage } = useLanguage();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -46,24 +50,26 @@ export function Header() {
 
             {/* Cart and User Actions */}
             <div className="flex items-center gap-2">
+              <Button 
+                variant="ghost" 
+                size="icon"
+                onClick={() => navigate("/notifications")}
+                className="relative"
+                aria-label="Notifications"
+              >
+                <Bell className="w-5 h-5" />
+                <span className="absolute top-1 right-1 w-2 h-2 bg-primary rounded-full"></span>
+              </Button>
+              
               <CartButton />
               
               <Button 
                 variant="ghost" 
                 size="sm"
-                onClick={() => console.log("Language toggle clicked")}
+                onClick={() => setLanguage(language === "en" ? "te" : "en")}
                 className="hidden md:inline-flex"
               >
-                EN | తె
-              </Button>
-              <Button 
-                variant="outline" 
-                size="sm"
-                onClick={() => console.log("Login clicked")}
-                className="hidden md:inline-flex"
-              >
-                <User className="w-4 h-4 mr-2" />
-                Login
+                {language === "en" ? "EN | తె" : "తె | EN"}
               </Button>
             </div>
           </div>

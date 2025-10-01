@@ -1,4 +1,6 @@
 import { Header } from "@/components/Header";
+import { FloatingBackButton } from "@/components/FloatingBackButton";
+import { FloatingHomeButton } from "@/components/FloatingHomeButton";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { TrendingUp, Calendar } from "lucide-react";
 
@@ -35,8 +37,10 @@ export default function MonthlySpend() {
   const totalOrders = mockSpendData.reduce((sum, item) => sum + item.orders, 0);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background pb-20 lg:pb-8">
       <Header />
+      <FloatingBackButton />
+      <FloatingHomeButton />
       <main className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold mb-6">Monthly Spend by Plant</h1>
         

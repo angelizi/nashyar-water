@@ -1,4 +1,6 @@
 import { Header } from "@/components/Header";
+import { FloatingBackButton } from "@/components/FloatingBackButton";
+import { FloatingHomeButton } from "@/components/FloatingHomeButton";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Package, CheckCircle, Truck, Bell } from "lucide-react";
@@ -48,8 +50,10 @@ const mockNotifications = [
 
 export default function Notifications() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background pb-20 lg:pb-8">
       <Header />
+      <FloatingBackButton />
+      <FloatingHomeButton />
       <main className="container mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-3xl font-bold">Notifications</h1>

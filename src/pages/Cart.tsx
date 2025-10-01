@@ -54,9 +54,11 @@ const Cart = () => {
   };
 
   if (items.length === 0) {
-    return (
-      <div className="min-h-screen bg-background">
-        <Header />
+  return (
+    <div className="min-h-screen bg-background pb-20 lg:pb-8">
+      <Header />
+      <FloatingBackButton />
+      <FloatingHomeButton />
         <div className="container mx-auto px-4 py-8">
           <Button 
             variant="ghost" 
