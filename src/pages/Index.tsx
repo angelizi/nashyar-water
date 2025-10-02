@@ -56,7 +56,7 @@ const Index = () => {
     {
       id: "1",
       name: "20L Bubble Can",
-      price: 80,
+      price: 13,
       description: "Standard 20L water can for home and office",
       image: bubbleCanPlain,
       inStock: true,
@@ -64,7 +64,7 @@ const Index = () => {
     {
       id: "2", 
       name: "20L Bubble with Tap",
-      price: 95,
+      price: 18,
       description: "20L can with convenient dispenser tap",
       image: bubbleCanWithTap,
       inStock: true,
@@ -72,7 +72,7 @@ const Index = () => {
     {
       id: "3",
       name: "20L Cooling Can",
-      price: 120,
+      price: 24,
       description: "Temperature-controlled cooling water can",
       image: coolingCan,
       inStock: true,
@@ -80,7 +80,7 @@ const Index = () => {
     {
       id: "4",
       name: "1L Water Bottle",
-      price: 20,
+      price: 10,
       description: "Convenient 1L bottle for on-the-go", 
       image: bottle1L,
       inStock: true,
@@ -88,7 +88,7 @@ const Index = () => {
     {
       id: "5",
       name: "2L Water Bottle",
-      price: 35,
+      price: 15,
       description: "Large 2L bottle for families",
       image: bottle2L,
       inStock: true,

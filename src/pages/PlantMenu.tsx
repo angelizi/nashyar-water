@@ -35,7 +35,7 @@ const PlantMenu = () => {
         {
           id: "aqua-1",
           name: "20L Bubble Can",
-          price: 80,
+          price: 12,
           description: "Standard 20L water can for home and office",
           image: bubbleCanPlain,
           inStock: true,
@@ -43,7 +43,7 @@ const PlantMenu = () => {
         {
           id: "aqua-2",
           name: "20L Bubble with Tap",
-          price: 95,
+          price: 18,
           description: "20L can with convenient dispenser tap",
           image: bubbleCanWithTap,
           inStock: true,
@@ -51,7 +51,7 @@ const PlantMenu = () => {
         {
           id: "aqua-3",
           name: "20L Cooling Can",
-          price: 120,
+          price: 25,
           description: "Temperature-controlled cooling water can",
           image: coolingCan,
           inStock: true,
@@ -59,7 +59,7 @@ const PlantMenu = () => {
         {
           id: "aqua-4",
           name: "1L Water Bottle",
-          price: 20,
+          price: 10,
           description: "Convenient 1L bottle for on-the-go",
           image: bottle1L,
           inStock: true,
@@ -67,7 +67,7 @@ const PlantMenu = () => {
         {
           id: "aqua-5",
           name: "2L Water Bottle",
-          price: 35,
+          price: 15,
           description: "Large 2L bottle for families",
           image: bottle2L,
           inStock: true,
@@ -86,7 +86,7 @@ const PlantMenu = () => {
         {
           id: "crystal-1",
           name: "20L Bubble Can",
-          price: 85,
+          price: 14,
           description: "Premium quality 20L water can",
           image: bubbleCanPlain,
           inStock: true,
@@ -94,7 +94,7 @@ const PlantMenu = () => {
         {
           id: "crystal-2",
           name: "20L Bubble with Tap",
-          price: 98,
+          price: 19,
           description: "20L premium can with tap system",
           image: bubbleCanWithTap,
           inStock: true,
@@ -102,7 +102,7 @@ const PlantMenu = () => {
         {
           id: "crystal-3",
           name: "20L Cooling Can",
-          price: 125,
+          price: 28,
           description: "Premium cooling water dispenser",
           image: coolingCan,
           inStock: true,
@@ -110,7 +110,7 @@ const PlantMenu = () => {
         {
           id: "crystal-4",
           name: "1L Water Bottle",
-          price: 22,
+          price: 10,
           description: "Pure mineral water 1L bottle",
           image: bottle1L,
           inStock: true,
@@ -118,7 +118,7 @@ const PlantMenu = () => {
         {
           id: "crystal-5",
           name: "2L Water Bottle",
-          price: 38,
+          price: 15,
           description: "Premium 2L water bottle",
           image: bottle2L,
           inStock: true,
@@ -137,7 +137,7 @@ const PlantMenu = () => {
         {
           id: "blue-1",
           name: "20L Bubble Can",
-          price: 78,
+          price: 11,
           description: "Quality assured 20L water can",
           image: bubbleCanPlain,
           inStock: true,
@@ -145,7 +145,7 @@ const PlantMenu = () => {
         {
           id: "blue-2",
           name: "20L Bubble with Tap",
-          price: 92,
+          price: 17,
           description: "20L can with easy dispenser tap",
           image: bubbleCanWithTap,
           inStock: true,
@@ -153,7 +153,7 @@ const PlantMenu = () => {
         {
           id: "blue-3",
           name: "20L Cooling Can",
-          price: 118,
+          price: 22,
           description: "Refreshing cold water dispenser",
           image: coolingCan,
           inStock: true,
@@ -161,7 +161,7 @@ const PlantMenu = () => {
         {
           id: "blue-4",
           name: "1L Water Bottle",
-          price: 19,
+          price: 10,
           description: "Refreshing purified water 1L",
           image: bottle1L,
           inStock: true,
@@ -169,7 +169,7 @@ const PlantMenu = () => {
         {
           id: "blue-5",
           name: "2L Water Bottle",
-          price: 34,
+          price: 15,
           description: "Refreshing purified water 2L",
           image: bottle2L,
           inStock: true,
@@ -188,7 +188,7 @@ const PlantMenu = () => {
         {
           id: "himalayan-1",
           name: "20L Bubble Can",
-          price: 75,
+          price: 13,
           description: "Natural fresh 20L water can",
           image: bubbleCanPlain,
           inStock: true,
@@ -196,7 +196,7 @@ const PlantMenu = () => {
         {
           id: "himalayan-2",
           name: "20L Bubble with Tap",
-          price: 88,
+          price: 16,
           description: "20L natural can with dispenser",
           image: bubbleCanWithTap,
           inStock: true,
@@ -204,7 +204,7 @@ const PlantMenu = () => {
         {
           id: "himalayan-3",
           name: "20L Cooling Can",
-          price: 115,
+          price: 27,
           description: "Natural water with cooling system",
           image: coolingCan,
           inStock: false,
@@ -212,7 +212,7 @@ const PlantMenu = () => {
         {
           id: "himalayan-4",
           name: "1L Water Bottle",
-          price: 18,
+          price: 10,
           description: "Natural spring water 1L",
           image: bottle1L,
           inStock: true,
@@ -220,7 +220,7 @@ const PlantMenu = () => {
         {
           id: "himalayan-5",
           name: "2L Water Bottle",
-          price: 32,
+          price: 15,
           description: "Natural spring water 2L",
           image: bottle2L,
           inStock: true,
