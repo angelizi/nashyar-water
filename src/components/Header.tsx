@@ -45,7 +45,7 @@ export function Header() {
               className="flex-1 md:flex-none md:max-w-md justify-start"
             >
               <Search className="w-4 h-4 mr-2" />
-              <span className="hidden sm:inline">{t("search")}</span>
+              <span className="hidden sm:inline">Search...</span>
             </Button>
 
             {/* Cart and User Actions */}
