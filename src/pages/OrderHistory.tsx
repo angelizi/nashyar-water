@@ -1,4 +1,6 @@
 import { Header } from "@/components/Header";
+import { FloatingBackButton } from "@/components/FloatingBackButton";
+import { FloatingHomeButton } from "@/components/FloatingHomeButton";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Package, Clock, CheckCircle } from "lucide-react";
