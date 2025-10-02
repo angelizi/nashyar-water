@@ -13,12 +13,12 @@ import { useToast } from "@/hooks/use-toast";
 export default function Settings() {
   const { toast } = useToast();
   const { theme, setTheme } = useTheme();
-  const { language, setLanguage } = useLanguage();
+  const { language, toggleLanguage, t } = useLanguage();
 
   const handleSave = () => {
     toast({
-      title: "Settings Saved",
-      description: "Your preferences have been updated.",
+      title: t("settingsSaved"),
+      description: t("preferencesUpdated"),
     });
   };
 
@@ -28,7 +28,7 @@ export default function Settings() {
       <FloatingBackButton />
       <FloatingHomeButton />
       <main className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-6">Settings</h1>
+        <h1 className="text-3xl font-bold mb-6">{t("settings")}</h1>
         
         <div className="space-y-6 max-w-2xl">
           {/* Appearance Settings */}
@@ -36,14 +36,14 @@ export default function Settings() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 {theme === "dark" ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
-                Appearance
+                {t("appearance")}
               </CardTitle>
               <CardDescription>Customize your app appearance</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
-                  <Label htmlFor="dark-mode">Dark Mode</Label>
+                  <Label htmlFor="dark-mode">{t("darkMode")}</Label>
                   <p className="text-sm text-muted-foreground">
                     Toggle dark mode theme
                   </p>
@@ -57,15 +57,15 @@ export default function Settings() {
               
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
-                  <Label htmlFor="language">Telugu Language</Label>
+                  <Label htmlFor="language">{t("teluguLanguage")}</Label>
                   <p className="text-sm text-muted-foreground">
-                    Switch to Telugu interface
+                    {t("switchToTelugu")}
                   </p>
                 </div>
                 <Switch
                   id="language"
                   checked={language === "te"}
-                  onCheckedChange={(checked) => setLanguage(checked ? "te" : "en")}
+                  onCheckedChange={toggleLanguage}
                 />
               </div>
             </CardContent>
@@ -75,9 +75,9 @@ export default function Settings() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Bell className="w-5 h-5" />
-                Notifications
+                {t("notifications")}
               </CardTitle>
-              <CardDescription>Manage your notification preferences</CardDescription>
+              <CardDescription>{t("notificationSettings")}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between">
@@ -99,7 +99,7 @@ export default function Settings() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Shield className="w-5 h-5" />
-                Preferences
+                {t("preferences")}
               </CardTitle>
               <CardDescription>Manage your app preferences</CardDescription>
             </CardHeader>
@@ -115,7 +115,7 @@ export default function Settings() {
             </CardContent>
           </Card>
 
-          <Button onClick={handleSave} className="w-full">Save Settings</Button>
+          <Button onClick={handleSave} className="w-full">{t("saveSettings")}</Button>
         </div>
       </main>
     </div>

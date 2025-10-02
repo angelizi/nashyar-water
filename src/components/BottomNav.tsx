@@ -2,16 +2,18 @@ import { Home, Heart, ShoppingCart, User } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { useCart } from "@/contexts/CartContext";
 import { useFavorites } from "@/contexts/FavoritesContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function BottomNav() {
   const { totalItems } = useCart();
   const { favorites } = useFavorites();
+  const { t } = useLanguage();
 
   const navItems = [
-    { icon: Home, label: "Home", path: "/" },
-    { icon: Heart, label: "Favorites", path: "/favorites", badge: favorites.length },
-    { icon: ShoppingCart, label: "Cart", path: "/cart", badge: totalItems },
-    { icon: User, label: "Profile", path: "/profile" },
+    { icon: Home, label: t("home"), path: "/" },
+    { icon: Heart, label: t("favorites"), path: "/favorites", badge: favorites.length },
+    { icon: ShoppingCart, label: t("cart"), path: "/cart", badge: totalItems },
+    { icon: User, label: t("profile"), path: "/profile" },
   ];
 
   return (

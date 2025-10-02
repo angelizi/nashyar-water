@@ -12,7 +12,7 @@ export function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
   const { totalItems } = useCart();
   const { toggleSidebar } = useSidebar();
-  const { language, setLanguage } = useLanguage();
+  const { language, toggleLanguage, t } = useLanguage();
   const navigate = useNavigate();
 
   return (
@@ -45,7 +45,7 @@ export function Header() {
               className="flex-1 md:flex-none md:max-w-md justify-start"
             >
               <Search className="w-4 h-4 mr-2" />
-              <span className="hidden sm:inline">Search...</span>
+              <span className="hidden sm:inline">{t("search")}</span>
             </Button>
 
             {/* Cart and User Actions */}
@@ -55,7 +55,7 @@ export function Header() {
                 size="icon"
                 onClick={() => navigate("/notifications")}
                 className="relative"
-                aria-label="Notifications"
+                aria-label={t("notifications")}
               >
                 <Bell className="w-5 h-5" />
                 <span className="absolute top-1 right-1 w-2 h-2 bg-primary rounded-full"></span>
@@ -64,12 +64,12 @@ export function Header() {
               <CartButton />
               
               <Button 
-                variant="ghost" 
+                variant="outline" 
                 size="sm"
-                onClick={() => setLanguage(language === "en" ? "te" : "en")}
-                className="hidden md:inline-flex"
+                onClick={toggleLanguage}
+                className="whitespace-nowrap"
               >
-                {language === "en" ? "EN | తె" : "తె | EN"}
+                {language === "en" ? t("toTelugu") : t("toEnglish")}
               </Button>
             </div>
           </div>
