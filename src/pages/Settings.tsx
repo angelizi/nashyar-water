@@ -54,20 +54,6 @@ export default function Settings() {
                   onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
                 />
               </div>
-              
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
-                  <Label htmlFor="language">{t("teluguLanguage")}</Label>
-                  <p className="text-sm text-muted-foreground">
-                    {t("switchToTelugu")}
-                  </p>
-                </div>
-                <Switch
-                  id="language"
-                  checked={language === "te"}
-                  onCheckedChange={toggleLanguage}
-                />
-              </div>
             </CardContent>
           </Card>
 

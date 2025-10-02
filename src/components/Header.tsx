@@ -62,15 +62,6 @@ export function Header() {
               </Button>
               
               <CartButton />
-              
-              <Button 
-                variant="outline" 
-                size="sm"
-                onClick={toggleLanguage}
-                className="whitespace-nowrap"
-              >
-                {language === "en" ? t("toTelugu") : t("toEnglish")}
-              </Button>
             </div>
           </div>
         </div>
