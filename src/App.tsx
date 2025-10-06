@@ -23,6 +23,8 @@ import Notifications from "./pages/Notifications";
 import Favorites from "./pages/Favorites";
 import PartyOrders from "./pages/PartyOrders";
 import NotFound from "./pages/NotFound";
+import Auth from "./pages/Auth";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -41,18 +43,19 @@ const App = () => (
                     <AppSidebar />
                     <div className="flex-1">
                       <Routes>
-                        <Route path="/" element={<Index />} />
-                        <Route path="/plant/:plantName" element={<PlantMenu />} />
-                        <Route path="/cart" element={<Cart />} />
-                        <Route path="/terms" element={<Terms />} />
-                        <Route path="/profile" element={<Profile />} />
-                        <Route path="/support" element={<Support />} />
-                        <Route path="/orders" element={<OrderHistory />} />
-                        <Route path="/spend" element={<MonthlySpend />} />
-                        <Route path="/settings" element={<Settings />} />
-                        <Route path="/notifications" element={<Notifications />} />
-                        <Route path="/favorites" element={<Favorites />} />
-                        <Route path="/party-orders" element={<PartyOrders />} />
+                        <Route path="/auth" element={<Auth />} />
+                        <Route path="/" element={<ProtectedRoute><Index /></ProtectedRoute>} />
+                        <Route path="/plant/:plantName" element={<ProtectedRoute><PlantMenu /></ProtectedRoute>} />
+                        <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
+                        <Route path="/terms" element={<ProtectedRoute><Terms /></ProtectedRoute>} />
+                        <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+                        <Route path="/support" element={<ProtectedRoute><Support /></ProtectedRoute>} />
+                        <Route path="/orders" element={<ProtectedRoute><OrderHistory /></ProtectedRoute>} />
+                        <Route path="/spend" element={<ProtectedRoute><MonthlySpend /></ProtectedRoute>} />
+                        <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+                        <Route path="/notifications" element={<ProtectedRoute><Notifications /></ProtectedRoute>} />
+                        <Route path="/favorites" element={<ProtectedRoute><Favorites /></ProtectedRoute>} />
+                        <Route path="/party-orders" element={<ProtectedRoute><PartyOrders /></ProtectedRoute>} />
                         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                         <Route path="*" element={<NotFound />} />
                       </Routes>

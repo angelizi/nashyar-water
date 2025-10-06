@@ -5,21 +5,41 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
-import { Moon, Sun, Bell, Shield, Mail } from "lucide-react";
+import { Moon, Sun, Bell, Shield, LogOut } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
 
 export default function Settings() {
   const { toast } = useToast();
   const { theme, setTheme } = useTheme();
   const { language, toggleLanguage, t } = useLanguage();
+  const navigate = useNavigate();
 
   const handleSave = () => {
     toast({
       title: t("settingsSaved"),
       description: t("preferencesUpdated"),
     });
+  };
+
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      toast({
+        title: "Error",
+        description: "Failed to log out",
+        variant: "destructive",
+      });
+    } else {
+      toast({
+        title: "Logged out",
+        description: "You have been successfully logged out",
+      });
+      navigate("/auth");
+    }
   };
 
   return (
@@ -98,6 +118,21 @@ export default function Settings() {
                 <Label htmlFor="save-address">Remember Delivery Address</Label>
                 <Switch id="save-address" defaultChecked />
               </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <LogOut className="w-5 h-5" />
+                Account
+              </CardTitle>
+              <CardDescription>Manage your account settings</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button onClick={handleLogout} variant="destructive" className="w-full">
+                Log Out
+              </Button>
             </CardContent>
           </Card>
 
