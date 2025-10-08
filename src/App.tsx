@@ -15,11 +15,8 @@ import PlantMenu from "./pages/PlantMenu";
 import Cart from "./pages/Cart";
 import Terms from "./pages/Terms";
 import Profile from "./pages/Profile";
-import Support from "./pages/Support";
-import OrderHistory from "./pages/OrderHistory";
 import MonthlySpend from "./pages/MonthlySpend";
 import Settings from "./pages/Settings";
-import Notifications from "./pages/Notifications";
 import Favorites from "./pages/Favorites";
 import PartyOrders from "./pages/PartyOrders";
 import NotFound from "./pages/NotFound";
@@ -49,11 +46,8 @@ const App = () => (
                         <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
                         <Route path="/terms" element={<ProtectedRoute><Terms /></ProtectedRoute>} />
                         <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-                        <Route path="/support" element={<ProtectedRoute><Support /></ProtectedRoute>} />
-                        <Route path="/orders" element={<ProtectedRoute><OrderHistory /></ProtectedRoute>} />
                         <Route path="/spend" element={<ProtectedRoute><MonthlySpend /></ProtectedRoute>} />
                         <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
-                        <Route path="/notifications" element={<ProtectedRoute><Notifications /></ProtectedRoute>} />
                         <Route path="/favorites" element={<ProtectedRoute><Favorites /></ProtectedRoute>} />
                         <Route path="/party-orders" element={<ProtectedRoute><PartyOrders /></ProtectedRoute>} />
                         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

@@ -1,4 +1,4 @@
-import { User, Headphones, History, Settings, Moon, Sun, Bell, LogOut, Heart, Package } from "lucide-react";
+import { User, Settings, Moon, Sun, LogOut, Heart, Package } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
 import {
   Sidebar,
@@ -13,14 +13,13 @@ import {
 } from "@/components/ui/sidebar";
 import { Switch } from "@/components/ui/switch";
 import { useTheme } from "next-themes";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 const menuItems = [
   { title: "Profile", url: "/profile", icon: User },
   { title: "Favorites", url: "/favorites", icon: Heart },
   { title: "Party Orders", url: "/party-orders", icon: Package },
-  { title: "Order History", url: "/orders", icon: History },
-  { title: "Customer Support", url: "/support", icon: Headphones },
-  { title: "Notifications", url: "/notifications", icon: Bell },
   { title: "Settings", url: "/settings", icon: Settings },
 ];
 
@@ -28,10 +27,23 @@ export function AppSidebar() {
   const { open } = useSidebar();
   const navigate = useNavigate();
   const { theme, setTheme } = useTheme();
+  const { toast } = useToast();
 
-  const handleLogout = () => {
-    // Mock logout - in real app would clear auth
-    navigate("/");
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      toast({
+        title: "Error",
+        description: "Failed to log out",
+        variant: "destructive",
+      });
+    } else {
+      toast({
+        title: "Logged out",
+        description: "You have been successfully logged out",
+      });
+      navigate("/auth");
+    }
   };
 
   return (
