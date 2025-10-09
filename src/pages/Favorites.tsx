@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Heart, ShoppingCart } from "lucide-react";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { useCart } from "@/contexts/CartContext";
-import { toast } from "sonner";
 
 export default function Favorites() {
   const { favorites, removeFavorite } = useFavorites();

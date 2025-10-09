@@ -1,7 +1,6 @@
 import { Home, Heart, ShoppingCart, User } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { useCart } from "@/contexts/CartContext";
-import { useFavorites } from "@/contexts/FavoritesContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export function BottomNav() {
