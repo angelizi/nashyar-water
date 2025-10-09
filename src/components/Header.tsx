@@ -2,18 +2,17 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { CartButton } from "@/components/CartButton";
 import { SearchDialog } from "@/components/SearchDialog";
-import { Search, MapPin, Bell, Droplets } from "lucide-react";
+import { Search, MapPin } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useSidebar } from "@/components/ui/sidebar";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useNavigate } from "react-router-dom";
+import logo from "@/assets/nashyar-logo-new.png";
 
 export function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
   const { totalItems } = useCart();
   const { toggleSidebar } = useSidebar();
-  const { language, toggleLanguage, t } = useLanguage();
-  const navigate = useNavigate();
+  const { t } = useLanguage();
 
   return (
     <>
@@ -25,10 +24,7 @@ export function Header() {
               onClick={toggleSidebar}
               className="flex items-center gap-2 hover:opacity-80 transition-opacity"
             >
-              <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                <Droplets className="w-5 h-5 text-primary-foreground" />
-              </div>
-              <span className="font-bold text-lg text-primary hidden sm:inline">Nashyar</span>
+              <img src={logo} alt="Nashyar" className="h-8 w-auto" />
             </button>
 
             {/* Location - Hide on mobile when cart has items */}
@@ -50,17 +46,6 @@ export function Header() {
 
             {/* Cart and User Actions */}
             <div className="flex items-center gap-2">
-              <Button 
-                variant="ghost" 
-                size="icon"
-                onClick={() => navigate("/notifications")}
-                className="relative"
-                aria-label={t("notifications")}
-              >
-                <Bell className="w-5 h-5" />
-                <span className="absolute top-1 right-1 w-2 h-2 bg-primary rounded-full"></span>
-              </Button>
-              
               <CartButton />
             </div>
           </div>

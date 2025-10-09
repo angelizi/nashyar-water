@@ -12,9 +12,8 @@ export default function Favorites() {
   const { favorites, removeFavorite } = useFavorites();
   const { addItem } = useCart();
 
-  const handleReorder = (item: any) => {
+  const handleOrder = (item: any) => {
     addItem(item);
-    toast.success(`Added ${item.name} to cart`);
   };
 
   return (
@@ -55,11 +54,11 @@ export default function Favorites() {
                     <div className="flex flex-col gap-2">
                       <Button
                         size="sm"
-                        onClick={() => handleReorder(item)}
+                        onClick={() => handleOrder(item)}
                         className="gap-2"
                       >
                         <ShoppingCart className="w-4 h-4" />
-                        Reorder
+                        Order
                       </Button>
                       <Button
                         size="sm"

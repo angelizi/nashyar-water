@@ -27,6 +27,7 @@ export function FavoritesProvider({ children }: { children: ReactNode }) {
       }
       return [...prev, item];
     });
+    // No toast notification
   };
 
   const removeFavorite = (id: string) => {

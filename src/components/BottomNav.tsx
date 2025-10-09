@@ -6,12 +6,11 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 export function BottomNav() {
   const { totalItems } = useCart();
-  const { favorites } = useFavorites();
   const { t } = useLanguage();
 
   const navItems = [
     { icon: Home, label: t("home"), path: "/" },
-    { icon: Heart, label: t("favorites"), path: "/favorites", badge: favorites.length },
+    { icon: Heart, label: t("favorites"), path: "/favorites" },
     { icon: ShoppingCart, label: t("cart"), path: "/cart", badge: totalItems },
     { icon: User, label: t("profile"), path: "/profile" },
   ];
