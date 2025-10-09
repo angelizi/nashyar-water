@@ -23,6 +23,7 @@ import NotFound from "./pages/NotFound";
 import Auth from "./pages/Auth";
 import ProtectedRoute from "./components/ProtectedRoute";
 
+// Force rebuild to clear cache
 const queryClient = new QueryClient();
 
 const App = () => (
