@@ -9,30 +9,16 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
 import { Textarea } from "@/components/ui/textarea";
 
 export default function Profile() {
   const { toast } = useToast();
   const [loading, setLoading] = useState(true);
-  const [showWarning, setShowWarning] = useState(false);
-  const [canEdit, setCanEdit] = useState(true);
-  const [daysRemaining, setDaysRemaining] = useState(0);
   const [profile, setProfile] = useState({
     username: "",
     phone_number: "",
     full_name: "",
     address: "",
-    last_profile_update: null as string | null,
   });
 
   useEffect(() => {
@@ -46,7 +32,7 @@ export default function Profile() {
 
       const { data, error } = await supabase
         .from('profiles')
-        .select('username, phone_number, full_name, address, last_profile_update')
+        .select('username, phone_number, full_name, address')
         .eq('id', user.id)
         .single();
 
@@ -58,21 +44,7 @@ export default function Profile() {
           phone_number: data.phone_number || "",
           full_name: data.full_name || "",
           address: data.address || "",
-          last_profile_update: data.last_profile_update,
         });
-
-        // Check if user can edit (14 days since last update)
-        if (data.last_profile_update) {
-          const lastUpdate = new Date(data.last_profile_update);
-          const now = new Date();
-          const daysSinceUpdate = Math.floor((now.getTime() - lastUpdate.getTime()) / (1000 * 60 * 60 * 24));
-          const daysLeft = 14 - daysSinceUpdate;
-          
-          if (daysLeft > 0) {
-            setCanEdit(false);
-            setDaysRemaining(daysLeft);
-          }
-        }
       }
     } catch (error) {
       console.error('Error loading profile:', error);
@@ -81,19 +53,7 @@ export default function Profile() {
     }
   };
 
-  const handleInitiateSave = () => {
-    if (!canEdit) {
-      toast({
-        title: "Cannot Update",
-        description: `You can update your profile again in ${daysRemaining} days.`,
-        variant: "destructive",
-      });
-      return;
-    }
-    setShowWarning(true);
-  };
-
-  const handleConfirmSave = async () => {
+  const handleSave = async () => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
@@ -104,19 +64,14 @@ export default function Profile() {
           phone_number: profile.phone_number,
           full_name: profile.full_name,
           address: profile.address,
-          last_profile_update: new Date().toISOString(),
         })
         .eq('id', user.id);
 
       if (error) throw error;
 
-      setShowWarning(false);
-      setCanEdit(false);
-      setDaysRemaining(14);
-      
       toast({
         title: "Profile Updated",
-        description: "Your profile has been saved successfully. You can update it again in 14 days.",
+        description: "Your profile has been saved successfully.",
       });
     } catch (error) {
       toast({
@@ -161,7 +116,7 @@ export default function Profile() {
                   id="full_name"
                   value={profile.full_name}
                   onChange={(e) => setProfile({ ...profile, full_name: e.target.value })}
-                  disabled={loading || !canEdit}
+                  disabled={loading}
                 />
               </div>
               <div>
@@ -170,7 +125,7 @@ export default function Profile() {
                   id="phone"
                   value={profile.phone_number}
                   onChange={(e) => setProfile({ ...profile, phone_number: e.target.value })}
-                  disabled={loading || !canEdit}
+                  disabled={loading}
                 />
               </div>
               <div>
@@ -179,40 +134,19 @@ export default function Profile() {
                   id="address"
                   value={profile.address}
                   onChange={(e) => setProfile({ ...profile, address: e.target.value })}
-                  disabled={loading || !canEdit}
+                  disabled={loading}
                   placeholder="Enter your delivery address"
                   className="min-h-[100px]"
                 />
               </div>
             </div>
 
-            {!canEdit && (
-              <p className="text-sm text-muted-foreground">
-                You can update your profile again in {daysRemaining} days.
-              </p>
-            )}
-
-            <Button onClick={handleInitiateSave} disabled={loading || !canEdit}>
+            <Button onClick={handleSave} disabled={loading}>
               {loading ? "Loading..." : "Save Changes"}
             </Button>
           </CardContent>
         </Card>
       </main>
-
-      <AlertDialog open={showWarning} onOpenChange={setShowWarning}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Update Profile Settings?</AlertDialogTitle>
-            <AlertDialogDescription>
-              You can update your settings only once every 14 days. Continue?
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleConfirmSave}>Continue</AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
     </div>
   );
 }
