@@ -9,7 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import nashyarLogo from "@/assets/nashyar-logo.png";
+import nashyarLogo from "@/assets/nashyar-logo-new.png";
 
 const registerSchema = z.object({
   username: z.string().min(3, "Username must be at least 3 characters").max(50, "Username must be less than 50 characters").regex(/^[a-zA-Z0-9_]+$/, "Username can only contain letters, numbers, and underscores"),
