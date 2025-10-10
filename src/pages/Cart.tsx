@@ -9,19 +9,45 @@ import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Textarea } from "@/components/ui/textarea";
+import { AlertDialog, AlertDialogAction, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { useCart } from "@/contexts/CartContext";
-import { ArrowLeft, Plus, Minus, Trash2, Tag, ShoppingBag, Clock } from "lucide-react";
-import { useState } from "react";
+import { ArrowLeft, Plus, Minus, Trash2, Tag, ShoppingBag, Clock, MapPin } from "lucide-react";
+import { useState, useEffect } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 const Cart = () => {
   const navigate = useNavigate();
   const { items, totalItems, totalPrice, updateQuantity, removeItem, clearCart } = useCart();
+  const { toast } = useToast();
   const [promoCode, setPromoCode] = useState("");
   const [appliedPromo, setAppliedPromo] = useState<string | null>(null);
   const [discount, setDiscount] = useState(0);
   const [deliverySlot, setDeliverySlot] = useState("morning");
+  const [address, setAddress] = useState("");
+  const [showAddressAlert, setShowAddressAlert] = useState(false);
 
   const finalTotal = totalPrice - discount;
+
+  useEffect(() => {
+    const loadProfileAddress = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("address")
+          .eq("id", user.id)
+          .maybeSingle();
+        
+        if (profile?.address) {
+          setAddress(profile.address);
+        }
+      }
+    };
+    
+    loadProfileAddress();
+  }, []);
 
   const handleQuantityChange = (id: string, newQuantity: number) => {
     if (newQuantity <= 0) {
@@ -50,8 +76,14 @@ const Cart = () => {
   };
 
   const handleProceedToPayment = () => {
+    // Validate address before proceeding
+    if (!address.trim()) {
+      setShowAddressAlert(true);
+      return;
+    }
+    
     // Placeholder for payment flow
-    console.log("Proceeding to payment with items:", items);
+    console.log("Proceeding to payment with items:", items, "Address:", address);
     navigate("/checkout"); // Will create this later
   };
 
@@ -283,7 +315,53 @@ const Cart = () => {
             </Card>
           </div>
         </div>
+
+        {/* Address Information Section */}
+        <Card className="mt-8">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <MapPin className="w-5 h-5" />
+              Delivery Address
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-2">
+              <Label htmlFor="address">Address *</Label>
+              <Textarea
+                id="address"
+                placeholder="Enter your complete delivery address"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                rows={4}
+                className="resize-none"
+              />
+              <p className="text-xs text-muted-foreground">
+                This address will be used for delivery. You can also update this in your{" "}
+                <Link to="/profile" className="text-primary hover:underline">
+                  profile settings
+                </Link>.
+              </p>
+            </div>
+          </CardContent>
+        </Card>
       </div>
+
+      {/* Address Required Alert Dialog */}
+      <AlertDialog open={showAddressAlert} onOpenChange={setShowAddressAlert}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Address Required</AlertDialogTitle>
+            <AlertDialogDescription>
+              Please enter your address information before proceeding to payment.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogAction onClick={() => setShowAddressAlert(false)}>
+              OK
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };
