@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 export default function Settings() {
   const { toast } = useToast();
   const { theme, setTheme } = useTheme();
-  const { language, toggleLanguage, t } = useLanguage();
+  const { t } = useLanguage();
   const navigate = useNavigate();
 
   const handleSave = () => {
