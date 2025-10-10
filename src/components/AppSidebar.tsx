@@ -15,6 +15,7 @@ import { Switch } from "@/components/ui/switch";
 import { useTheme } from "next-themes";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const menuItems = [
   { title: "Profile", url: "/profile", icon: User },
@@ -28,6 +29,8 @@ export function AppSidebar() {
   const navigate = useNavigate();
   const { theme, setTheme } = useTheme();
   const { toast } = useToast();
+  const isMobile = useIsMobile();
+  const showLabels = open || isMobile;
 
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut();
@@ -63,7 +66,7 @@ export function AppSidebar() {
                       }
                     >
                       <item.icon className="w-4 h-4" />
-                      {open && <span>{item.title}</span>}
+                      {showLabels && <span>{item.title}</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -74,9 +77,9 @@ export function AppSidebar() {
                 <div className="flex items-center justify-between px-3 py-2">
                   <div className="flex items-center gap-2">
                     {theme === "dark" ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
-                    {open && <span className="text-sm">Dark Mode</span>}
+                    {showLabels && <span className="text-sm">Dark Mode</span>}
                   </div>
-                  {open && (
+                  {showLabels && (
                     <Switch
                       checked={theme === "dark"}
                       onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
@@ -89,7 +92,7 @@ export function AppSidebar() {
               <SidebarMenuItem>
                 <SidebarMenuButton onClick={handleLogout}>
                   <LogOut className="w-4 h-4" />
-                  {open && <span>Logout</span>}
+                  {showLabels && <span>Logout</span>}
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
