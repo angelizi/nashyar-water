@@ -295,6 +295,30 @@ const Cart = () => {
                   <span>₹{finalTotal}</span>
                 </div>
 
+                <Separator />
+
+                {/* Delivery Address */}
+                <div className="space-y-2">
+                  <Label htmlFor="address" className="flex items-center gap-2">
+                    <MapPin className="w-4 h-4" />
+                    Delivery Address *
+                  </Label>
+                  <Textarea
+                    id="address"
+                    placeholder="Enter your complete delivery address"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    rows={4}
+                    className="resize-none"
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    This address will be used for delivery. You can also update this in your{" "}
+                    <Link to="/profile" className="text-primary hover:underline">
+                      profile settings
+                    </Link>.
+                  </p>
+                </div>
+
                 <Button 
                   className="w-full"
                   size="lg"
@@ -315,35 +339,6 @@ const Cart = () => {
             </Card>
           </div>
         </div>
-
-        {/* Address Information Section */}
-        <Card className="mt-8">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <MapPin className="w-5 h-5" />
-              Delivery Address
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-2">
-              <Label htmlFor="address">Address *</Label>
-              <Textarea
-                id="address"
-                placeholder="Enter your complete delivery address"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                rows={4}
-                className="resize-none"
-              />
-              <p className="text-xs text-muted-foreground">
-                This address will be used for delivery. You can also update this in your{" "}
-                <Link to="/profile" className="text-primary hover:underline">
-                  profile settings
-                </Link>.
-              </p>
-            </div>
-          </CardContent>
-        </Card>
       </div>
 
       {/* Address Required Alert Dialog */}
