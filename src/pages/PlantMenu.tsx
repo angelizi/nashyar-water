@@ -1,4 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { Header } from "@/components/Header";
 import { ProductCard } from "@/components/ProductCard";
 import { CartButton } from "@/components/CartButton";
@@ -6,7 +7,13 @@ import { FloatingBackButton } from "@/components/FloatingBackButton";
 import { FloatingHomeButton } from "@/components/FloatingHomeButton";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Star, Clock, Truck } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { ArrowLeft, Clock, Truck, Plus, Minus } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
+import { toast } from "sonner";
 import waterPlant1 from "@/assets/water-plant-1.jpg";
 import waterPlant2 from "@/assets/water-plant-2.jpg";
 import waterPlant3 from "@/assets/water-plant-3.jpg";
@@ -17,15 +24,70 @@ import coolingCan from "@/assets/cooling-can.png";
 import bottle1L from "@/assets/1l-bottle.jpg";
 import bottle2L from "@/assets/2l-bottle.jpg";
 
+const partyProducts = [
+  {
+    id: "party-500ml",
+    name: "500ml Water Bottle",
+    basePrice: 15,
+    image: bottle1L,
+  },
+  {
+    id: "party-750ml",
+    name: "750ml Water Bottle",
+    basePrice: 20,
+    image: bottle1L,
+  },
+];
+
 const PlantMenu = () => {
   const { plantName } = useParams();
   const navigate = useNavigate();
+  const { addItem } = useCart();
+  const [quantities, setQuantities] = useState<Record<string, number>>({});
+  const [temperatures, setTemperatures] = useState<Record<string, "normal" | "cooling">>({});
+
+  const handleQuantityChange = (id: string, change: number) => {
+    setQuantities((prev) => ({
+      ...prev,
+      [id]: Math.max(0, (prev[id] || 0) + change),
+    }));
+  };
+
+  const handleTemperatureChange = (id: string, temp: "normal" | "cooling") => {
+    setTemperatures((prev) => ({
+      ...prev,
+      [id]: temp,
+    }));
+  };
+
+  const handleAddToCart = (product: typeof partyProducts[0], plantName: string) => {
+    const quantity = quantities[product.id] || 0;
+    if (quantity === 0) {
+      toast.error("Please select quantity");
+      return;
+    }
+
+    const temperature = temperatures[product.id] || "normal";
+    const price = temperature === "cooling" ? product.basePrice + 5 : product.basePrice;
+
+    for (let i = 0; i < quantity; i++) {
+      addItem({
+        id: `${product.id}-${temperature}-${Date.now()}-${i}`,
+        name: `${product.name} (${temperature === "cooling" ? "Cooling" : "Normal"})`,
+        price,
+        image: product.image,
+        plantName: plantName,
+      });
+    }
+
+    toast.success(`Added ${quantity}x ${product.name} to cart`);
+    setQuantities((prev) => ({ ...prev, [product.id]: 0 }));
+  };
 
   // Mock data - in real app this would come from API/database
   const plantDetails = {
     "aqua-pure-waters": {
       name: "Aqua Pure Waters",
-      rating: 4.5,
       deliveryTime: "30-45 mins",
       image: waterPlant1,
       minOrder: 50,
@@ -76,7 +138,6 @@ const PlantMenu = () => {
     },
     "crystal-springs": {
       name: "Crystal Springs",
-      rating: 4.3,
       deliveryTime: "25-40 mins",
       image: waterPlant2,
       minOrder: 40,
@@ -127,7 +188,6 @@ const PlantMenu = () => {
     },
     "blue-horizon-water": {
       name: "Blue Horizon Water",
-      rating: 4.7,
       deliveryTime: "35-50 mins",
       image: waterPlant3,
       minOrder: 60,
@@ -178,7 +238,6 @@ const PlantMenu = () => {
     },
     "fresh-flow-waters": {
       name: "Fresh Flow Waters",
-      rating: 4.4,
       deliveryTime: "20-35 mins",
       image: waterPlant4,
       minOrder: 45,
@@ -284,10 +343,6 @@ const PlantMenu = () => {
               
               <div className="flex items-center gap-6 text-sm text-muted-foreground mb-4">
                 <div className="flex items-center gap-1">
-                  <Star className="w-4 h-4 fill-warning text-warning" />
-                  <span className="font-medium">{plant.rating}</span>
-                </div>
-                <div className="flex items-center gap-1">
                   <Clock className="w-4 h-4" />
                   <span>{plant.deliveryTime}</span>
                 </div>
@@ -301,31 +356,144 @@ const PlantMenu = () => {
         </div>
       </section>
 
-      {/* Products Menu */}
+      {/* Products with Tabs */}
       <main className="container mx-auto px-4 py-8">
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h2 className="text-2xl font-bold text-foreground mb-2">
-              Available Products
-            </h2>
-            <p className="text-muted-foreground">
-              Choose from our fresh water products
-            </p>
-          </div>
+        <div className="flex items-center justify-end mb-6">
           <CartButton />
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {plant.products.map((product) => (
-            <ProductCard key={product.id} {...product} plantName={plant.name} />
-          ))}
-        </div>
-        
-        {plant.products.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-muted-foreground">No products available at the moment.</p>
-          </div>
-        )}
+
+        <Tabs defaultValue="products" className="w-full">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="products">Products</TabsTrigger>
+            <TabsTrigger value="party-orders">Party Orders</TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="products" className="mt-6">
+            <div className="mb-6">
+              <h2 className="text-2xl font-bold text-foreground mb-2">
+                Available Products
+              </h2>
+              <p className="text-muted-foreground">
+                Choose from our fresh water products
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {plant.products.map((product) => (
+                <ProductCard key={product.id} {...product} plantName={plant.name} />
+              ))}
+            </div>
+            
+            {plant.products.length === 0 && (
+              <div className="text-center py-12">
+                <p className="text-muted-foreground">No products available at the moment.</p>
+              </div>
+            )}
+          </TabsContent>
+
+          <TabsContent value="party-orders" className="mt-6">
+            <div className="mb-6">
+              <h2 className="text-2xl font-bold text-foreground mb-2">
+                Party Orders
+              </h2>
+              <p className="text-muted-foreground">
+                Order in bulk for your events and parties
+              </p>
+            </div>
+            
+            <div className="grid gap-6">
+              {partyProducts.map((product) => {
+                const quantity = quantities[product.id] || 0;
+                const temperature = temperatures[product.id] || "normal";
+                const finalPrice = temperature === "cooling" ? product.basePrice + 5 : product.basePrice;
+
+                return (
+                  <Card key={product.id}>
+                    <CardContent className="p-6">
+                      <div className="flex flex-col sm:flex-row gap-6">
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          className="w-32 h-32 object-cover rounded-md"
+                        />
+                        
+                        <div className="flex-1 space-y-4">
+                          <div>
+                            <h3 className="text-xl font-semibold">{product.name}</h3>
+                            <p className="text-2xl font-bold text-primary mt-2">
+                              ₹{finalPrice} <span className="text-sm text-muted-foreground">per bottle</span>
+                            </p>
+                          </div>
+
+                          <div>
+                            <Label className="mb-2 block">Temperature</Label>
+                            <RadioGroup
+                              value={temperature}
+                              onValueChange={(value) => handleTemperatureChange(product.id, value as "normal" | "cooling")}
+                            >
+                              <div className="flex gap-4">
+                                <div className="flex items-center space-x-2">
+                                  <RadioGroupItem value="normal" id={`${product.id}-normal`} />
+                                  <Label htmlFor={`${product.id}-normal`}>Normal (₹{product.basePrice})</Label>
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                  <RadioGroupItem value="cooling" id={`${product.id}-cooling`} />
+                                  <Label htmlFor={`${product.id}-cooling`}>Cooling (₹{product.basePrice + 5})</Label>
+                                </div>
+                              </div>
+                            </RadioGroup>
+                          </div>
+
+                          <div className="flex items-center gap-4">
+                            <Label>Quantity:</Label>
+                            <div className="flex items-center gap-2 bg-muted rounded-md">
+                              <Button
+                                size="sm"
+                                variant="ghost"
+                                onClick={() => handleQuantityChange(product.id, -1)}
+                                className="h-10 w-10 p-0"
+                              >
+                                <Minus className="w-4 h-4" />
+                              </Button>
+                              <span className="font-medium min-w-[3ch] text-center">
+                                {quantity}
+                              </span>
+                              <Button
+                                size="sm"
+                                variant="ghost"
+                                onClick={() => handleQuantityChange(product.id, 1)}
+                                className="h-10 w-10 p-0"
+                              >
+                                <Plus className="w-4 h-4" />
+                              </Button>
+                            </div>
+                          </div>
+
+                          <Button
+                            onClick={() => handleAddToCart(product, plant.name)}
+                            className="w-full sm:w-auto"
+                          >
+                            Add to Cart
+                          </Button>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
+
+            <div className="mt-8 p-4 bg-muted rounded-lg">
+              <h2 className="font-semibold mb-2">Bulk Order Benefits</h2>
+              <ul className="text-sm text-muted-foreground space-y-1">
+                <li>• Orders above 50 bottles get 10% discount</li>
+                <li>• Orders above 100 bottles get 15% discount</li>
+                <li>• Free delivery for orders above 30 bottles</li>
+                <li>• Choose between normal and cooling temperature</li>
+              </ul>
+            </div>
+          </TabsContent>
+        </Tabs>
       </main>
     </div>
   );

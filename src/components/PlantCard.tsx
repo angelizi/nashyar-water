@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Star, Clock, Truck } from "lucide-react";
+import { Clock, Truck } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 interface PlantCardProps {
@@ -35,13 +35,7 @@ export function PlantCard({ name, rating, deliveryTime, image, products, minOrde
       </div>
       
       <CardContent className="p-4">
-        <div className="flex items-start justify-between mb-2">
-          <h3 className="font-semibold text-lg text-foreground">{name}</h3>
-          <div className="flex items-center gap-1">
-            <Star className="w-4 h-4 fill-warning text-warning" />
-            <span className="text-sm font-medium">{rating}</span>
-          </div>
-        </div>
+        <h3 className="font-semibold text-lg text-foreground mb-2">{name}</h3>
         
         <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
           <div className="flex items-center gap-1">

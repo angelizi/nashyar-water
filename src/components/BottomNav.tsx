@@ -1,4 +1,4 @@
-import { Home, Heart, ShoppingCart, User } from "lucide-react";
+import { Home, ShoppingCart, User } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { useCart } from "@/contexts/CartContext";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -9,7 +9,6 @@ export function BottomNav() {
 
   const navItems = [
     { icon: Home, label: t("home"), path: "/" },
-    { icon: Heart, label: t("favorites"), path: "/favorites" },
     { icon: ShoppingCart, label: t("cart"), path: "/cart", badge: totalItems },
     { icon: User, label: t("profile"), path: "/profile" },
   ];

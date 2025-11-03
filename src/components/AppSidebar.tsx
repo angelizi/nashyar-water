@@ -1,4 +1,4 @@
-import { User, Settings, Moon, Sun, LogOut, Heart, Package } from "lucide-react";
+import { User, Settings, Moon, Sun, LogOut } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
 import {
   Sidebar,
@@ -19,8 +19,6 @@ import { useIsMobile } from "@/hooks/use-mobile";
 
 const menuItems = [
   { title: "Profile", url: "/profile", icon: User },
-  { title: "Favorites", url: "/favorites", icon: Heart },
-  { title: "Party Orders", url: "/party-orders", icon: Package },
   { title: "Settings", url: "/settings", icon: Settings },
 ];
 

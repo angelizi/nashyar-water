@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
-import { Moon, Sun, Bell, Shield, LogOut } from "lucide-react";
+import { Moon, Sun, Shield, LogOut } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useToast } from "@/hooks/use-toast";
@@ -73,30 +73,6 @@ export default function Settings() {
                   checked={theme === "dark"}
                   onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
                 />
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Bell className="w-5 h-5" />
-                {t("notifications")}
-              </CardTitle>
-              <CardDescription>{t("notificationSettings")}</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex items-center justify-between">
-                <Label htmlFor="order-updates">Order Updates</Label>
-                <Switch id="order-updates" defaultChecked />
-              </div>
-              <div className="flex items-center justify-between">
-                <Label htmlFor="promotions">Promotions & Offers</Label>
-                <Switch id="promotions" defaultChecked />
-              </div>
-              <div className="flex items-center justify-between">
-                <Label htmlFor="delivery-alerts">Delivery Alerts</Label>
-                <Switch id="delivery-alerts" defaultChecked />
               </div>
             </CardContent>
           </Card>

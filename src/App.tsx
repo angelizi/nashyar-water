@@ -5,7 +5,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "@/contexts/CartContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
-import { FavoritesProvider } from "@/contexts/FavoritesContext";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { BottomNav } from "@/components/BottomNav";
@@ -17,8 +16,6 @@ import Terms from "./pages/Terms";
 import Profile from "./pages/Profile";
 import MonthlySpend from "./pages/MonthlySpend";
 import Settings from "./pages/Settings";
-import Favorites from "./pages/Favorites";
-import PartyOrders from "./pages/PartyOrders";
 import NotFound from "./pages/NotFound";
 import Auth from "./pages/Auth";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -30,9 +27,8 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider attribute="class" defaultTheme="light">
       <LanguageProvider>
-        <FavoritesProvider>
-          <CartProvider>
-            <TooltipProvider>
+        <CartProvider>
+          <TooltipProvider>
               <Toaster />
               <Sonner />
               <BrowserRouter>
@@ -49,8 +45,6 @@ const App = () => (
                         <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
                         <Route path="/spend" element={<ProtectedRoute><MonthlySpend /></ProtectedRoute>} />
                         <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
-                        <Route path="/favorites" element={<ProtectedRoute><Favorites /></ProtectedRoute>} />
-                        <Route path="/party-orders" element={<ProtectedRoute><PartyOrders /></ProtectedRoute>} />
                         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                         <Route path="*" element={<NotFound />} />
                       </Routes>
@@ -60,8 +54,7 @@ const App = () => (
                 </SidebarProvider>
               </BrowserRouter>
             </TooltipProvider>
-          </CartProvider>
-        </FavoritesProvider>
+        </CartProvider>
       </LanguageProvider>
     </ThemeProvider>
   </QueryClientProvider>
