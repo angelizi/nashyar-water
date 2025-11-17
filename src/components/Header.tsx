@@ -6,7 +6,7 @@ import { Search, MapPin } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useSidebar } from "@/components/ui/sidebar";
 import { useLanguage } from "@/contexts/LanguageContext";
-import logo from "@/assets/nashyar-logo.png";
+import logo from "@/assets/splash-logo.png";
 
 export function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
