@@ -146,54 +146,59 @@ const Cart = () => {
                   Clear Cart
                 </Button>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-3">
                 {items.map((item) => (
-                  <div key={item.id} className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-4 border rounded-lg">
+                  <div key={item.id} className="flex items-center gap-3 p-3 border rounded-lg hover:border-primary/50 transition-colors">
                     <img 
                       src={item.image} 
                       alt={item.name}
-                      className="w-16 h-16 object-cover rounded-md flex-shrink-0"
+                      className="w-20 h-20 object-cover rounded-md flex-shrink-0"
                     />
                     
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-foreground truncate">{item.name}</h3>
+                      <h3 className="font-semibold text-foreground mb-1">{item.name}</h3>
                       {item.plantName && (
-                        <p className="text-xs text-muted-foreground/80 italic">from {item.plantName}</p>
+                        <p className="text-xs text-muted-foreground mb-2">from {item.plantName}</p>
                       )}
-                      <p className="text-lg font-bold text-primary">₹{item.price}</p>
+                      <div className="flex items-center gap-3 flex-wrap">
+                        <span className="text-sm font-medium text-muted-foreground">₹{item.price} each</span>
+                        <div className="flex items-center gap-2 bg-muted/50 rounded-md px-2 py-1">
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
+                            className="h-7 w-7 p-0 hover:bg-background"
+                          >
+                            <Minus className="w-3.5 h-3.5" />
+                          </Button>
+                          
+                          <Input
+                            type="number"
+                            min="1"
+                            value={item.quantity}
+                            onChange={(e) => handleQuantityChange(item.id, parseInt(e.target.value) || 1)}
+                            className="h-7 w-14 text-center p-1 bg-background border-0 font-medium"
+                          />
+                          
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
+                            className="h-7 w-7 p-0 hover:bg-background"
+                          >
+                            <Plus className="w-3.5 h-3.5" />
+                          </Button>
+                        </div>
+                      </div>
                     </div>
                     
-                    <div className="flex items-center gap-2 ml-auto sm:ml-0">
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
-                        className="h-8 w-8 p-0"
-                      >
-                        <Minus className="w-4 h-4" />
-                      </Button>
-                      
-                      <span className="font-medium min-w-[2ch] text-center">
-                        {item.quantity}
-                      </span>
-                      
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
-                        className="h-8 w-8 p-0"
-                      >
-                        <Plus className="w-4 h-4" />
-                      </Button>
-                    </div>
-                    
-                    <div className="flex items-center justify-between w-full sm:w-auto sm:block sm:text-right">
-                      <p className="font-bold whitespace-nowrap">₹{item.price * item.quantity}</p>
+                    <div className="flex flex-col items-end gap-2 ml-auto">
+                      <p className="text-lg font-bold text-primary whitespace-nowrap">₹{item.price * item.quantity}</p>
                       <Button
                         size="sm"
                         variant="ghost"
                         onClick={() => removeItem(item.id)}
-                        className="text-destructive hover:text-destructive p-1"
+                        className="text-destructive hover:text-destructive hover:bg-destructive/10 h-7 px-2"
                       >
                         <Trash2 className="w-4 h-4" />
                       </Button>
