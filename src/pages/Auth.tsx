@@ -9,7 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import nashyarLogo from "@/assets/nashyar-logo-new.png";
+import splashLogo from "@/assets/splash-logo.png";
 
 const registerSchema = z.object({
   username: z.string().min(3, "Username must be at least 3 characters").max(50, "Username must be less than 50 characters").regex(/^[a-zA-Z0-9_]+$/, "Username can only contain letters, numbers, and underscores"),
@@ -150,7 +150,7 @@ const Auth = () => {
       <Card className="w-full max-w-md">
         <CardHeader className="text-center space-y-4">
           <div className="flex justify-center">
-            <img src={nashyarLogo} alt="Nashyar Water" className="h-20 w-auto" />
+            <img src={splashLogo} alt="Splash Water" className="h-32 w-auto" />
           </div>
           <CardTitle className="text-2xl">
             {isLogin ? "Welcome Back" : "Create Account"}
