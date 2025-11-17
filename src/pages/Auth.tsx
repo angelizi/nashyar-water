@@ -72,8 +72,8 @@ const Auth = () => {
     try {
       setLoading(true);
       
-      // Use username@nashyar.local as email format for Supabase auth
-      const email = `${data.username}@nashyar.local`;
+      // Use username@splash.local as email format for Supabase auth
+      const email = `${data.username}@splash.local`;
       
       const { error } = await supabase.auth.signUp({
         email,
@@ -116,7 +116,7 @@ const Auth = () => {
       setLoading(true);
       
       // Convert username to email format
-      const email = `${data.username}@nashyar.local`;
+      const email = `${data.username}@splash.local`;
       
       const { error } = await supabase.auth.signInWithPassword({
         email,
