@@ -45,7 +45,7 @@ export default function Support() {
                 <Mail className="w-5 h-5 text-primary" />
                 <div>
                   <p className="font-medium">Email</p>
-                  <p className="text-sm text-muted-foreground">support@nashyar.com</p>
+                  <p className="text-sm text-muted-foreground">support@splash.com</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">

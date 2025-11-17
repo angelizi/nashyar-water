@@ -24,7 +24,7 @@ export function Header() {
               onClick={toggleSidebar}
               className="flex items-center gap-2 hover:opacity-80 transition-opacity"
             >
-              <img src={logo} alt="Nashyar" className="h-8 w-auto" />
+              <img src={logo} alt="Splash" className="h-8 w-auto" />
             </button>
 
             {/* Location - Hide on mobile when cart has items */}
